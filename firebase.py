@@ -1,4 +1,5 @@
 import pyrebase
+from gabung import gabung
 
 firebaseConfig = {
     "apiKey": "AIzaSyAeLzgjzy_LV_bpDck064AEUZ2vRf91ka4",
@@ -18,5 +19,10 @@ def stream_handler(message):
     print(message["event"]) # put
     print(message["path"]) # /-K7yGTTEp7O549EzTYtI
     print(message["data"]) # {'title': 'Pyrebase', "body": "etc..."}
+    if message["data"] != None :
+        a =  gabung(message["data"]["berita"])
+        a["link"] = message["data"]["berita"]
+        db.child("berita").push(a)
+        db.child("link").remove()
 
 my_stream = db.child("link").stream(stream_handler)

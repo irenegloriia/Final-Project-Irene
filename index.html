@@ -100,7 +100,7 @@
           // Initialize Firebase
           firebase.initializeApp(firebaseConfig);
           firebase.analytics();
-      var berita = firebase.database().ref()
+      var berita = firebase.database().ref("berita/")
       var link = firebase.database().ref("link/")
 
       function myFunction() {
@@ -116,14 +116,18 @@
         link.set({
           berita : a
         })
-        $( 'h1' ).remove()
+        berita.on('child_added',(data) => {
+          $( 'h1' ).remove()
         // label = str.substring(msg.length - n)
         // pesan = str.substring(0,msg.length - n)
         // console.log("label = "+msg+typeof msg)
         // console.log("label = "+label+typeof label)
         // console.log("label = "+pesan+typeof pesan)
-            $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+msg.hasil+'</b>'+'<br>'
-            +msg.judul+'<br>'+msg.berita+'</div>')
+            $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+data.val()['label']+'</b>'+'<br>'
+            +data.val()['title']+'<br>'+data.val()['berita']+'</div>')
+
+        })
+       
       }
     </script>
 </body>
