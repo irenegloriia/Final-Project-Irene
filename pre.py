@@ -71,7 +71,9 @@ def preprocessing(teks):
 
     #Removal Stopwords Indonesia
     list_stopwords = set(stopwords.words('indonesian'))
-    list_stopwords.remove("naik")
+    hapus = ["naik","tidak","jangan","kurang","belum","bukan","tinggi"]
+    for a in hapus:
+        list_stopwords.remove(a)
     list_stopwords = list_stopwords.union(newlist)
 
     def remove_stopwords(text):
@@ -98,6 +100,16 @@ def preprocessing(teks):
         output = [stemmer.stem(token) for token in text]
         return output
     teks = stem(teks)
+
+    kata_negasi = ["tidak", "jangan", "belum", "bukan","kurang"]
+    def negasi(text):
+        for idx, kata in enumerate(text):
+            if(kata in kata_negasi):
+                if(idx != len(text)-1):
+                    text[idx] = text[idx]+"_"+text[idx+1]
+                    text.pop(idx+1)
+        return text
+    teks = negasi(teks)
 
     def gabung(text):
         gab = " ".join(text)

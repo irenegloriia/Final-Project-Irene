@@ -1,7 +1,8 @@
 # from scrappppp import scrap
 from crawling import scrap
 from pre import preprocessing
-from tfidf_algo import tfidf_knn
+from TFIDFPosKnn import tfidf
+from knn import knn
 
 def gabung(linkk):
     # a = input("Masukkan link berita : ")
@@ -11,11 +12,13 @@ def gabung(linkk):
     prepro = preprocessing(teks[1])
 
 
-    hasil = tfidf_knn(prepro)
-    print(hasil)
+    bobot = tfidf(prepro)
+    hasil = knn([bobot[0]])
+    print(bobot)
     item = {
         'berita' : teks[1],
         'hasil' : hasil[0],
-        'judul' : teks[0]
+        'judul' : teks[0],
+        'kata' : bobot[1]
     }
     return(item)

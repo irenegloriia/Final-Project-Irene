@@ -61,7 +61,7 @@ def scrap(a):
         teks = isi.text
         return [title,teks]
 
-    elif ("kompas.com" in a):
+    elif ("kompas.com" in a or "money.kompas.com" in a):
         src = requests.get(a)
         document = bs(src.content,'lxml')
 

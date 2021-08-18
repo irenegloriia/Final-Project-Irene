@@ -19,6 +19,7 @@ def stream_handler(message):
     print(message["event"]) # put
     print(message["path"]) # /-K7yGTTEp7O549EzTYtI
     print(message["data"]) # {'title': 'Pyrebase', "body": "etc..."}
+    print("====")
     if message["data"] != None :
         a =  gabung(message["data"]["berita"])
         a["link"] = message["data"]["berita"]
